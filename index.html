@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Vulnerable Web App</title>
+    <link rel="stylesheet" type="text/css" href="/styles.css">
+
+</head>
+<body>
+    <h1>Vulnerable Web Application</h1>
+    <h2>XSS Demonstration</h2>
+    <form method="POST" action="/xss">
+        <label for="input">Enter Text:</label>
+        <input type="text" id="input" name="input">
+        <input type="submit" value="Submit">
+    </form>
+
+    <h2>SQL Injection Demonstration</h2>
+    <form method="POST" action="/sql-injection">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username">
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
