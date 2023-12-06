@@ -12,7 +12,20 @@ let db = new sqlite3.Database(':memory:', (err) => {
     console.log('Connected to the in-memory SQLite database.');
 });
 
+// Create the users table
 db.run('CREATE TABLE users (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT)');
+
+// Insert example rows
+const exampleUsernames = ['JohnDoe', 'JaneSmith', 'AliceJones', 'BobJohnson', 'EveWilliams'];
+
+exampleUsernames.forEach((username) => {
+    db.run(`INSERT INTO users (username) VALUES (?)`, [username], (err) => {
+        if (err) {
+            return console.error(err.message);
+        }
+        console.log(`Inserted row with username: ${username}`);
+    });
+});
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -22,12 +35,9 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-
 app.post('/xss', (req, res) => {
-    
     res.send(`You entered: ${req.body.input}`);
 });
-
 
 app.post('/sql-injection', (req, res) => {
     let username = req.body.username;
